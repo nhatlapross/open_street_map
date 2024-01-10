@@ -59,9 +59,9 @@
         const options = {
             enableHighAccuracy: true, 
             // Get high accuracy reading, if available (default false)
-            timeout: 100000, 
+            timeout: 4000, 
             // Time to return a position successfully before error (default infinity)
-            maximumAge: 100000, 
+            maximumAge: 2000, 
             // Milliseconds for which it is acceptable to use cached position (default 0)
         };
 
@@ -112,7 +112,7 @@
             // }
             
             //map.setView([lat,lng]);
-            map.setView([10.7703, 106.6778], 14);
+            //map.setView([10.7703, 106.6778], 14);
             
 
             // document.getElementById('output').innerText = `
