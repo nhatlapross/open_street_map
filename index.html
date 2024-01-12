@@ -98,7 +98,7 @@
         function success(pos) {
             const lat = pos.coords.latitude;
             const lng = pos.coords.longitude;
-            const accuracy = pos.coords.accuracy; // Accuracy in metres
+            const accuracy = 100;// pos.coords.accuracy; // Accuracy in metres
 
             // marker = L.marker([lat,lng]).addTo(map);
             // circle = L.circle([lat,lng],{radius:accuracy}).addTo(map);
