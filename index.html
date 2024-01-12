@@ -91,7 +91,7 @@
             // Milliseconds for which it is acceptable to use cached position (default 0)
         };
 
-        navigator.geolocation.watchPosition(success, error, options);
+        // navigator.geolocation.watchPosition(success, error, options);
         // Fires success function immediately and when user position changes
 
         let marker, circle, zoomed;
@@ -113,40 +113,47 @@
         };
         var popup = L.popup();
 
-        function success(pos) {
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-            const accuracy = 100;// pos.coords.accuracy; // Accuracy in metres
-
-            // marker = L.marker([lat,lng]).addTo(map);
-            // circle = L.circle([lat,lng],{radius:accuracy}).addTo(map);
-
-            Object.keys(mapPlace).forEach(key=>{
+        Object.keys(mapPlace).forEach(key=>{
                 marker = L.marker(mapPlace[key][0]).addTo(map);
                 marker.bindPopup(key);
                 marker.setPopupContent("<h6>"+key+"<h6><img src='"+mapPlace[key][1]+"' alt='quan 10' width='60' height='60' data-toggle='modal' data-target='#myModal' data-whatever='"+key+"' onclick='openModal(`"+key+"`)'> ");
-                L.circle(mapPlace[key][0],{radius:accuracy}).addTo(map);
-                // L.popup()
-                // .setLatLng(mapPlace[key])
-                // .setContent(key)
-                // .addTo(map);
-            })
+                L.circle(mapPlace[key][0],{radius:30}).addTo(map);
+        })
 
-            // if(!zoomed)
-            // {
-            //     map.fitBounds(circle.getBounds());
-            // }
+        // function success(pos) {
+        //     const lat = pos.coords.latitude;
+        //     const lng = pos.coords.longitude;
+        //     const accuracy = 10;// pos.coords.accuracy; // Accuracy in metres
+
+        //     // marker = L.marker([lat,lng]).addTo(map);
+        //     // circle = L.circle([lat,lng],{radius:accuracy}).addTo(map);
+
+        //     Object.keys(mapPlace).forEach(key=>{
+        //         marker = L.marker(mapPlace[key][0]).addTo(map);
+        //         marker.bindPopup(key);
+        //         marker.setPopupContent("<h6>"+key+"<h6><img src='"+mapPlace[key][1]+"' alt='quan 10' width='60' height='60' data-toggle='modal' data-target='#myModal' data-whatever='"+key+"' onclick='openModal(`"+key+"`)'> ");
+        //         L.circle(mapPlace[key][0],{radius:accuracy}).addTo(map);
+        //         // L.popup()
+        //         // .setLatLng(mapPlace[key])
+        //         // .setContent(key)
+        //         // .addTo(map);
+        //     })
+
+        //     // if(!zoomed)
+        //     // {
+        //     //     map.fitBounds(circle.getBounds());
+        //     // }
             
-            //map.setView([lat,lng]);
-            //map.setView([10.7703, 106.6778], 14);
+        //     //map.setView([lat,lng]);
+        //     //map.setView([10.7703, 106.6778], 14);
             
 
-            // document.getElementById('output').innerText = `
-            // User coordinates: 
-            // Latitude ${lat}.
-            // Longitude ${lng}.
-            // Estimation accurate within ${Math.round(accuracy)} metres.`;
-        }
+        //     // document.getElementById('output').innerText = `
+        //     // User coordinates: 
+        //     // Latitude ${lat}.
+        //     // Longitude ${lng}.
+        //     // Estimation accurate within ${Math.round(accuracy)} metres.`;
+        // }
 
         // function onMapClick(e) {
         //     popup
@@ -163,15 +170,15 @@
         }
       
 
-        function error(err) {
-            if (err.code === 1) {
-                alert("Please allow geolocation access");
-                // Runs if user refuses access
-            } else {
-                alert("Cannot get current location");
-                // Runs if there was a technical problem.
-            }
-        }
+        // function error(err) {
+        //     if (err.code === 1) {
+        //         alert("Please allow geolocation access");
+        //         // Runs if user refuses access
+        //     } else {
+        //         alert("Cannot get current location");
+        //         // Runs if there was a technical problem.
+        //     }
+        // }
 
         $('#myModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
@@ -185,6 +192,5 @@
             $('#my_link').attr('href',mapPlace[recipient][2]);
         })
     </script>
-  
 </body>
 </html>
