@@ -35,8 +35,16 @@
 </head>
 <body data-rsssl=1>
     <h1>BẢN ĐỒ HÀNH CHÍNH QUẬN 10</h1>
-    <img src="logo.png" alt="logo" width="200" height="100" style="z-index:100; position: fixed; right: 10px;">
-    <div id="map" style="z-index: 2;"></div>
+    <img src="logo.png" alt="logo" width="200" height="100" style="z-index:100; position: fixed; left: calc(40vw + 100px);">
+    <div class="row">
+        <div class="col-lg-8 col-md-12" id="map" style="z-index: 2;"></div>
+        <div class="list-group col-lg-4 col-md-12" style="height: 600px;overflow: scroll;" id="myListGroup">
+            <a class="list-group-item list-group-item-action" onclick='resetLocation()'>
+                <img src="folder.png" height="35"/>
+                <i class="fa-regular fa-folder">Quận 10</i>
+            </a>
+        </div>
+    </div>
 
     <div id="output"></div>
      <!-- Modal -->
@@ -117,8 +125,18 @@
                 marker = L.marker(mapPlace[key][0]).addTo(map);
                 marker.bindPopup(key);
                 marker.setPopupContent("<h6>"+key+"<h6><img src='"+mapPlace[key][1]+"' alt='quan 10' width='60' height='60' data-toggle='modal' data-target='#myModal' data-whatever='"+key+"' onclick='openModal(`"+key+"`)'> ");
-                L.circle(mapPlace[key][0],{radius:30}).addTo(map);
+                L.circle(mapPlace[key][0],{radius:10}).addTo(map);
+                $('#myListGroup').append("<a class='list-group-item list-group-item-action' onclick='getLocation(`"+mapPlace[key][0]+"`)'><img src='folder.png' height='35'/><i class='fa-regular fa-folder'>"+key+"</i></a>");
         })
+
+        function getLocation(event){
+            postition = event.split(",");
+            map.setView([postition[0],postition[1]], 20);
+        }
+
+        function resetLocation(){
+             map.setView([10.7703, 106.6778], 14);
+        }
 
         // function success(pos) {
         //     const lat = pos.coords.latitude;
